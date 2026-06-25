@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - KopiKita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-stone-100 h-screen flex items-center justify-center p-4 font-sans">
+
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden max-w-4xl w-full grid md:grid-cols-2">
+        <div class="relative hidden md:block">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80" 
+                 class="w-full h-full object-cover" alt="Login Coffee">
+            <div class="absolute inset-0 bg-gradient-to-t from-orange-950/90 to-transparent flex flex-col justify-end p-8 text-white">
+                <h2 class="text-3xl font-bold tracking-tighter mb-2">KOPI<span class="text-orange-400">KITA</span></h2>
+                <p class="text-stone-300 text-sm">Bergabunglah dan nikmati aroma kopi autentik yang menanti Anda.</p>
+            </div>
+        </div>
+
+        <div class="p-8 sm:p-12 flex flex-col justify-center">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-stone-900 mb-2">Selamat Datang</h3>
+                <p class="text-stone-500 text-sm">Silakan buat akun KopiKita Anda</p>
+            </div>
+
+            <div id="errorAlert" class="hidden mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm flex items-center gap-2">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="errorMessage">Pesan error di sini.</span>
+            </div>
+
+            <div id="successAlert" class="hidden mb-4 bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-xl text-sm flex items-center gap-2">
+                <i class="fa-solid fa-circle-check"></i>
+                <span id="successMessage">Registrasi berhasil! Mengalihkan...</span>
+            </div>
+
+            <form id="registerForm" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">Nama Lengkap</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input type="text" id="name" required
+                               class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-orange-600 focus:bg-white transition" 
+                               placeholder="Nama Anda">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">Alamat Email</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+                        <input type="email" id="email" required
+                               class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-orange-600 focus:bg-white transition" 
+                               placeholder="nama@email.com">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">Password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input type="password" id="password" required minlength="6"
+                               class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-orange-600 focus:bg-white transition" 
+                               placeholder="Minimal 6 karakter">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">Konfirmasi Password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input type="password" id="confirmPassword" required minlength="6"
+                               class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-orange-600 focus:bg-white transition" 
+                               placeholder="Ulangi password">
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn"
+                        class="w-full bg-orange-900 text-white py-3 rounded-xl font-semibold hover:bg-orange-800 transition shadow-lg shadow-orange-900/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                    <span id="btnText">Daftar</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </form>
+
+            <div class="mt-8 text-center text-sm text-stone-500">
+                Sudah punya akun? <a href="login.html" class="text-orange-600 font-semibold hover:underline">Masuk Sekarang</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const registerForm = document.getElementById('registerForm');
+        const errorAlert = document.getElementById('errorAlert');
+        const errorMessage = document.getElementById('errorMessage');
+        const successAlert = document.getElementById('successAlert');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+
+        registerForm.addEventListener('submit', async (e) => {
+            // 1. Mencegah form melakukan aksi bawaan yang merefresh halaman
+            e.preventDefault();
+
+            // 2. Sembunyikan alert error jika sebelumnya muncul
+            errorAlert.classList.add('hidden');
+            
+            // 3. Ambil nilai dari input
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // 4. Validasi password sisi frontend
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Password dan Konfirmasi Password tidak cocok!';
+                errorAlert.classList.remove('hidden');
+                return;
+            }
+
+            // 5. Ubah state tombol menjadi loading
+            submitBtn.disabled = true;
+            btnText.textContent = 'Memproses...';
+
+            try {
+                // 6. Tembak API Backend Elysia (Pastikan server bun dijalankan)
+                const response = await fetch('http://localhost:3000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Jika sukses, tampilkan alert sukses
+                    registerForm.reset();
+                    successAlert.classList.remove('hidden');
+                    
+                    // Alihkan ke halaman login setelah 2 detik
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                } else {
+                    // Jika gagal (misal: email sudah ada), tampilkan error dari backend
+                    errorMessage.textContent = data.message || 'Terjadi kesalahan saat mendaftar.';
+                    errorAlert.classList.remove('hidden');
+                }
+            } catch (error) {
+                // Tangkap error jaringan atau jika server mati
+                errorMessage.textContent = 'Tidak dapat terhubung ke server. Pastikan backend KopiKita aktif.';
+                errorAlert.classList.remove('hidden');
+            } finally {
+                // Kembalikan state tombol
+                submitBtn.disabled = false;
+                btnText.textContent = 'Daftar';
+            }
+        });
+    </script>
+</body>
+</html>

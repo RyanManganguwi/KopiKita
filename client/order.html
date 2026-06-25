@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Pesanan - KopiKita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="text-2xl font-bold text-orange-900 tracking-tighter">KOPI<span class="text-orange-600">KITA</span></a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-sm font-medium text-stone-500 hover:text-orange-600 transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Kembali
+                    </a>
+                    <!-- Nav Auth Section -->
+                    <div id="navAuthSection" class="flex items-center gap-3">
+                        <!-- Akan diisi otomatis oleh JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-stone-900">Buat Pesanan Baru</h1>
+            <p class="text-stone-500 mt-1">Pilih menu dan selesaikan pesanan pelanggan.</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Area Kiri: Daftar Menu -->
+            <div class="w-full lg:w-2/3">
+                <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
+                    <button class="bg-orange-900 text-white px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap">Semua Menu</button>
+                    <button class="bg-white border border-stone-200 text-stone-600 hover:border-orange-600 hover:text-orange-600 px-5 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap">Signature</button>
+                    <button class="bg-white border border-stone-200 text-stone-600 hover:border-orange-600 hover:text-orange-600 px-5 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap">Espresso Based</button>
+                    <button class="bg-white border border-stone-200 text-stone-600 hover:border-orange-600 hover:text-orange-600 px-5 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap">Non-Coffee</button>
+                </div>
+
+                <!-- Grid Menu -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5" id="menuGrid">
+                    <!-- Item 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-4 flex gap-4 hover:shadow-md transition">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=150&q=80" class="w-24 h-24 rounded-xl object-cover" alt="Arabica V60">
+                        <div class="flex flex-col justify-between flex-1">
+                            <div>
+                                <h3 class="font-bold text-stone-900">Arabica V60</h3>
+                                <p class="text-stone-500 text-xs mt-1">Fruity & balanced</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-black text-orange-600">Rp 25.000</span>
+                                <button onclick="addToCart('Arabica V60', 25000)" class="bg-stone-100 hover:bg-orange-600 hover:text-white w-8 h-8 rounded-lg flex items-center justify-center transition text-stone-600">
+                                    <i class="fa-solid fa-plus text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-4 flex gap-4 hover:shadow-md transition">
+                        <img src="https://images.unsplash.com/photo-1572286258217-40142c1c6a70?auto=format&fit=crop&w=150&q=80" class="w-24 h-24 rounded-xl object-cover" alt="Salted Caramel Latte">
+                        <div class="flex flex-col justify-between flex-1">
+                            <div>
+                                <h3 class="font-bold text-stone-900">Salted Caramel Latte</h3>
+                                <p class="text-stone-500 text-xs mt-1">Sweet, savory, creamy</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-black text-orange-600">Rp 32.000</span>
+                                <button onclick="addToCart('Salted Caramel Latte', 32000)" class="bg-stone-100 hover:bg-orange-600 hover:text-white w-8 h-8 rounded-lg flex items-center justify-center transition text-stone-600">
+                                    <i class="fa-solid fa-plus text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-4 flex gap-4 hover:shadow-md transition">
+                        <img src="https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=150&q=80" class="w-24 h-24 rounded-xl object-cover" alt="Americano">
+                        <div class="flex flex-col justify-between flex-1">
+                            <div>
+                                <h3 class="font-bold text-stone-900">Iced Americano</h3>
+                                <p class="text-stone-500 text-xs mt-1">Classic bold espresso</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-black text-orange-600">Rp 20.000</span>
+                                <button onclick="addToCart('Iced Americano', 20000)" class="bg-stone-100 hover:bg-orange-600 hover:text-white w-8 h-8 rounded-lg flex items-center justify-center transition text-stone-600">
+                                    <i class="fa-solid fa-plus text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-4 flex gap-4 hover:shadow-md transition">
+                        <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=150&q=80" class="w-24 h-24 rounded-xl object-cover" alt="Matcha Latte">
+                        <div class="flex flex-col justify-between flex-1">
+                            <div>
+                                <h3 class="font-bold text-stone-900">Matcha Latte</h3>
+                                <p class="text-stone-500 text-xs mt-1">Premium Uji Matcha</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-black text-orange-600">Rp 28.000</span>
+                                <button onclick="addToCart('Matcha Latte', 28000)" class="bg-stone-100 hover:bg-orange-600 hover:text-white w-8 h-8 rounded-lg flex items-center justify-center transition text-stone-600">
+                                    <i class="fa-solid fa-plus text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area Kanan: Form Pemesanan & Cart -->
+            <div class="w-full lg:w-1/3">
+                <div class="bg-white rounded-2xl shadow-lg border border-stone-100 p-6 sticky top-24">
+                    <h2 class="text-xl font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100">Detail Pesanan</h2>
+                    
+                    <!-- PERINGATAN LOGIN (Disembunyikan secara default, dikontrol oleh JS) -->
+                    <div id="authWarning" class="hidden mb-5 bg-red-50 border border-red-200 p-4 rounded-xl flex flex-col items-center text-center">
+                        <i class="fa-solid fa-triangle-exclamation text-red-500 text-3xl mb-2"></i>
+                        <p class="text-sm text-red-800 mb-3 font-medium">Anda belum login. Silakan login terlebih dahulu untuk membuat pesanan.</p>
+                        <a href="login.html" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg text-sm font-bold transition shadow-md shadow-red-600/20">
+                            Ke Halaman Login
+                        </a>
+                    </div>
+
+                    <!-- Informasi Pemesan -->
+                    <div class="space-y-4 mb-6 border-b border-stone-100 pb-4">
+                        <div class="grid grid-cols-2 gap-2">
+                            <button class="bg-orange-100 border border-orange-600 text-orange-900 py-2 rounded-lg text-sm font-semibold">Dine In</button>
+                            <button class="bg-stone-50 border border-stone-200 text-stone-500 hover:bg-stone-100 py-2 rounded-lg text-sm font-semibold transition">Takeaway</button>
+                        </div>
+                        <div>
+                            <input type="text" id="customerName" placeholder="Nama Pelanggan" class="w-full px-4 py-2 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-orange-600 transition">
+                        </div>
+                        <div>
+                            <input type="number" id="tableNumber" placeholder="Nomor Meja" class="w-full px-4 py-2 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-orange-600 transition">
+                        </div>
+                    </div>
+
+                    <!-- List Keranjang -->
+                    <div id="cartItems" class="space-y-3 mb-6 min-h-[150px] max-h-[250px] overflow-y-auto pr-2">
+                        <!-- State Kosong -->
+                        <div id="emptyCart" class="text-center text-stone-400 py-8 flex flex-col items-center">
+                            <i class="fa-solid fa-basket-shopping text-3xl mb-2"></i>
+                            <p class="text-sm">Belum ada item pesanan</p>
+                        </div>
+                    </div>
+
+                    <!-- Ringkasan Harga -->
+                    <div class="space-y-2 mb-6">
+                        <div class="flex justify-between text-sm text-stone-500">
+                            <span>Subtotal</span>
+                            <span id="subtotalLabel">Rp 0</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-stone-500">
+                            <span>Pajak (10%)</span>
+                            <span id="taxLabel">Rp 0</span>
+                        </div>
+                        <div class="flex justify-between text-lg font-black text-stone-900 pt-2 border-t border-stone-100 mt-2">
+                            <span>Total</span>
+                            <span id="totalLabel" class="text-orange-600">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button id="processBtn" class="w-full bg-orange-900 text-white py-3 rounded-xl font-bold transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check-to-slot"></i> Proses Pesanan
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // === LOGIKA AUTENTIKASI ===
+        let isLoggedIn = false;
+
+        function checkLoginStatus() {
+            const token = localStorage.getItem('token');
+            const userName = localStorage.getItem('userName');
+            
+            const navAuthSection = document.getElementById('navAuthSection');
+            const authWarning = document.getElementById('authWarning');
+            const processBtn = document.getElementById('processBtn');
+            const customerNameInput = document.getElementById('customerName');
+
+            if (token && userName) {
+                // STATUS: SUDAH LOGIN
+                isLoggedIn = true;
+                authWarning.classList.add('hidden'); // Sembunyikan peringatan merah
+                
+                // Aktifkan tombol proses
+                processBtn.disabled = false;
+                processBtn.classList.add('hover:bg-orange-800', 'shadow-lg', 'shadow-orange-900/20');
+                processBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-stone-400');
+
+                // Isi otomatis nama pelanggan (opsional)
+                if(customerNameInput) customerNameInput.value = userName;
+
+                // Tampilkan nama user di navbar
+                navAuthSection.innerHTML = `
+                    <span class="text-sm font-semibold text-orange-900 bg-orange-100 px-4 py-2 rounded-full border border-orange-200 flex items-center gap-2">
+                        <i class="fa-solid fa-user text-orange-600"></i> ${userName}
+                    </span>
+                    <button id="logoutBtn" class="text-stone-500 hover:text-red-600 p-2 transition text-sm" title="Logout">
+                        <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                    </button>
+                `;
+
+                // Event Logout
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('userName');
+                    window.location.reload();
+                });
+
+            } else {
+                // STATUS: BELUM LOGIN
+                isLoggedIn = false;
+                authWarning.classList.remove('hidden'); // Tampilkan peringatan merah
+                
+                // Matikan tombol proses
+                processBtn.disabled = true;
+                processBtn.classList.remove('hover:bg-orange-800', 'shadow-lg', 'bg-orange-900');
+                processBtn.classList.add('opacity-50', 'cursor-not-allowed', 'bg-stone-400');
+                
+                // Tampilkan tombol login di navbar
+                navAuthSection.innerHTML = `
+                    <a href="login.html" class="bg-orange-900 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-orange-800 transition">
+                        Login
+                    </a>
+                `;
+            }
+        }
+
+        // Jalankan pengecekan saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', checkLoginStatus);
+
+
+        // === LOGIKA KERANJANG ===
+        let cart = [];
+
+        function addToCart(name, price) {
+            // Cegah menambah pesanan jika belum login
+            if (!isLoggedIn) {
+                alert('Gagal: Anda harus login terlebih dahulu untuk menambah pesanan.');
+                return; 
+            }
+
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartContainer = document.getElementById('cartItems');
+            const emptyState = document.getElementById('emptyCart');
+            let html = '';
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                emptyState.style.display = 'flex';
+            } else {
+                if (emptyState) emptyState.style.display = 'none';
+                
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.qty;
+                    subtotal += itemTotal;
+                    
+                    html += `
+                        <div class="flex justify-between items-center bg-stone-50 p-3 rounded-xl border border-stone-100">
+                            <div class="flex-1">
+                                <h4 class="text-sm font-bold text-stone-800">${item.name}</h4>
+                                <div class="text-xs text-stone-500 mt-1">${item.qty}x @ Rp ${item.price.toLocaleString('id-ID')}</div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="font-bold text-sm text-stone-900">Rp ${itemTotal.toLocaleString('id-ID')}</span>
+                                <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 transition">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            cartContainer.innerHTML = cart.length === 0 ? `
+                <div id="emptyCart" class="text-center text-stone-400 py-8 flex flex-col items-center">
+                    <i class="fa-solid fa-basket-shopping text-3xl mb-2"></i>
+                    <p class="text-sm">Belum ada item pesanan</p>
+                </div>
+            ` : html;
+
+            const tax = subtotal * 0.10;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotalLabel').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById('taxLabel').innerText = `Rp ${tax.toLocaleString('id-ID')}`;
+            document.getElementById('totalLabel').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+    </script>
+</body>
+</html>
